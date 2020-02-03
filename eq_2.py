@@ -1,4 +1,3 @@
-#import plotly
 import json
 
 in_file = open('eq_data_1_day_m1.json','r')
@@ -36,18 +35,19 @@ print(mags[:10])
 from plotly.graph_objs import Scattergeo,Layout
 from plotly import offline
 
-#data = [Scattergeo(lon=lons,lat=lats)]         
-# same way to input data.
+
 data = [{
     'type': 'scattergeo',
     'lon': lons,
     'lat': lats,
-    'marker':{                                              #     mags=[1,2,3,4,5]
-        'size':[5*mag for mag in mags],     #this list equal to--- for mag in mags:  
-    },                                                              # mag *= 5
-}]                                                                 # mags.append(mag)
-                                                                 # mags = [5,10,15,20,25]
-
+    'marker':{                                              
+        'size':[5*mag for mag in mags], 
+        'color':mags,
+        'colorscale':'Viridis',
+        'reversescale':True,
+        'colorbar':{'title':'Magniude'}    
+    },                                                             
+}]                                                                                                                          
 
 
 my_layout = Layout(title="Global Earthquakes")
